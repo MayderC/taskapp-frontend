@@ -1,26 +1,71 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <main>
+    <t-navbar-menu></t-navbar-menu>
+    <router-view/>
+    <a href="https://mayder.codes" target="_blank">App Creada por MayderC</a>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapActions, mapMutations, mapState } from 'vuex'
+import TNavbarMenu from './components/t-navbar-menu/TNavbarMenu.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components : {
+    TNavbarMenu
+  },
+  methods : {
+    ...mapMutations(['setUID']),
+    ...mapActions(['getTaskListFromDB']),
+
+    verifyToken(){
+
+      const token = this.uid
+      this.getTaskListFromDB(token)
+
+    }
+  },
+  computed : {
+    ...mapState(['uid'])
+  },
+  created(){
+    this.setUID()
+    this.verifyToken()
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+
+  *, *:before, *:after
+    box-sizing: border-box
+  
+  h1, h2, p 
+    margin: 0
+    padding: 0
+
+  #app
+    min-height: 100vh
+    display: grid
+    place-items: center
+
+  body
+    margin: 0
+    background: #FFF
+    background: #9194e7
+    font-family: 'Poppins', sans-serif
+  
+  main
+    width: 1250px
+    margin-left: auto
+    margin-right: auto
+
+
+  @media (max-width: 1350px)
+    main
+      width: 95%
+
+  @media (max-width: 530px)
+    main
+      width: 100%
+
 </style>
