@@ -6,7 +6,7 @@ article.card
     h2 {{task.taskname}}
 
   .card__footer
-    t-buttom(size="small", color="blue" text="Edit" height="35px")
+    t-buttom(size="small", color="blue" text="Edit" height="35px"  @click="setDataToEdit(task)")
     t-buttom(size="small", color="rose" text="Delete" height="35px" @click="deleteItem(task.id)")
 
 
@@ -30,9 +30,13 @@ export default {
 
   computed :{
     ...mapState(['taskList', 'uid']),
+
+
+    
+
   },
   methods : {
-    ...mapMutations(['updateTaskLsit']),
+    ...mapMutations(['updateTaskLsit', 'setOneTask']),
 
     deleteItem(id){
 
@@ -41,6 +45,12 @@ export default {
       this.updateTaskLsit(newList)
       deleteTask(id, this.uid)
 
+    },
+
+    setDataToEdit(task){
+
+
+      this.setOneTask(JSON.parse(JSON.stringify(task)))
     }
   }
 }

@@ -19,6 +19,10 @@ export default {
   computed :{
     ...mapState(['taskList'])
   },
+  methods : {
+
+
+  }
 }
 </script>
 

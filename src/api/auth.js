@@ -1,7 +1,8 @@
+const URL = "https://taskname.herokuapp.com/api/auth"
+//const URL = "http://localhost:3000/api/auth"
 const login = async(user)=>{
-  const URL = "https://taskname.herokuapp.com/api/auth/login"
   try {
-    const res = await fetch(URL, 
+    const res = await fetch(`${URL}/login`, 
       {
         method : 'POST',
         body : JSON.stringify(user),
@@ -16,9 +17,8 @@ const login = async(user)=>{
 
 
 const register = async(user)=>{
-  const URL = "https://taskname.herokuapp.com/api/auth/register"
   try {
-    const res = await fetch(URL, 
+    const res = await fetch(`${URL}/register`, 
       {
         method : 'POST',
         body : JSON.stringify(user),

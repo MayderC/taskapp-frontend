@@ -6,6 +6,7 @@ export default createStore({
   state: {
     isLogin : false,
     taskList : {tasks : []},
+    task: {taskname : "", description: "", id : ""},
     uid : "",
     profile: {}
   },
@@ -16,6 +17,18 @@ export default createStore({
     },
     setIsNotLogin(state){
       state.isLogin = JSON.parse(localStorage.getItem('isLogin')) || false
+    },
+
+    updateTaskname(state, message) {
+      state.task.taskname = message
+    },
+
+    updateDescription(state, message) {
+      state.task.description = message
+    },
+
+    setOneTask(state, taskParam){
+      state.task = taskParam
     },
 
     

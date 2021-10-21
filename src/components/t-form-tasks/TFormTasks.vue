@@ -5,7 +5,7 @@ section.section
     label(for="taskname")
       input#taskname(type="text" placeholder="Task Name" v-model="taskname").form__input.taskname
     label(for="description")
-      textarea#description(placeholder="Description..." v-model="description").form__input.description
+      textarea#description(placeholder="Description..."  v-model="description").form__input.description
     t-buttom(size="large" color="rose" :text="textButtom" height="48px" @click="sendTask")
 
 </template>
@@ -18,27 +18,42 @@ export default {
   name  : 'TFormTasks',
   data(){
     return {
-      taskname    : "",
-      description : "",
       textButtom  : "Save",
-      lastItem: {}
     }
   },
   components : {
     TButtom
   },
   computed : {
-    ...mapState(['uid'])
+    ...mapState(['uid', 'task']),
+
+    taskname :{
+      get() {return this.$store.state.task.taskname},
+      set(value){this.updateTaskname(value)}
+    },
+    description: {
+      get(){return this.$store.state.task.description},
+      set(value){this.updateDescription(value)}
+    }
+
   },
   methods: {
-
-    ...mapMutations(['setNewItemTaskList']),
+    //this.task es un objeto del sotore de vuex, donde esta el taskname y description, 
+    // taskname y description de computed se usan en el v-model de los inputs
+    ...mapMutations(['setNewItemTaskList', 'updateTaskname', 'updateDescription']),
 
     sendTask(){
-      const uidToken = this.uid
-      const data = {task : { taskname : this.taskname, description: this.description, id : ""}}
 
-      if(this.taskname.length < 5 || this.description.length < 3){return}
+ 
+
+      const uidToken = this.uid
+      const data = {task : { taskname : this.task.taskname, description: this.task.description, id : ""}}
+
+      //is only edit?
+
+      //editTask().then((res)=>{})
+
+      if(this.task.taskname.length < 5 || this.task.description.length < 3){return}
 
       saveTask(data, uidToken)
       .then((res)  => {
@@ -50,15 +65,17 @@ export default {
 
     },
     clearInputsAfterRequest(msg){
-      this.taskname     = ""
-      this.description  = ""
+      this.task.taskname     = ""
+      this.task.description  = ""
+      this.task.id = ""
       this.textButtom   = msg
       setTimeout(() => {this.textButtom = "Save" }, 350);
     },
 
     addNewItem(data){
       this.setNewItemTaskList(data)
-    }
+    },
+
   }
 }
 </script>
