@@ -51,7 +51,7 @@ export default {
   body
     margin: 0
     background: #FFF
-    background: #9194e7
+    //background: #9194e7
     font-family: 'Poppins', sans-serif
   
   main
