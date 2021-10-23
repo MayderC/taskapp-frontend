@@ -34,15 +34,12 @@ const getAllTasks = async(token) =>{
   } catch (error) {return error}
 }
 
-
 const deleteTask = async(id, token) =>{
-
   const payload = {
     task : {
       id : id
     }
   }
-
   try {
     const result = await fetch(URL, {
       method : 'DELETE',
@@ -52,8 +49,25 @@ const deleteTask = async(id, token) =>{
         'x-token' : token
       }
     })
-    
     const data = await result.json()
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+const editOneTask = async(token, body)=>{
+  try {
+    const res = await fetch(URL, {
+      method : 'PUT',
+      body: JSON.stringify({task : body}),
+      headers : {
+        'Content-Type' : 'application/json',
+        'x-token': token
+      }
+    })
+
+    const data = await res.json()
     return data
 
   } catch (error) {
@@ -67,5 +81,6 @@ const deleteTask = async(id, token) =>{
 module.exports = {
   saveTask,
   getAllTasks,
-  deleteTask
+  deleteTask,
+  editOneTask
 }

@@ -7,10 +7,19 @@ export default createStore({
     isLogin : false,
     taskList : {tasks : []},
     task: {taskname : "", description: "", id : ""},
+    editTask: false,
     uid : "",
     profile: {}
   },
   mutations: {
+
+    updateOneItemInArray(state, value){
+      state.taskList.tasks[value.pos] = {taskname : value.taskname, description : value.description, id : value.id}
+    },
+
+    setEditTask(state, val){
+      state.editTask = val
+    },
 
     setIsLogin(state){
       state.isLogin = JSON.parse(localStorage.getItem('isLogin'))
@@ -19,29 +28,20 @@ export default createStore({
       state.isLogin = JSON.parse(localStorage.getItem('isLogin')) || false
     },
 
-    updateTaskname(state, message) {
-      state.task.taskname = message
-    },
+    updateTaskname(state, message) {state.task.taskname = message},
 
-    updateDescription(state, message) {
-      state.task.description = message
-    },
+    updateTaskID(state, val){state.task.id = val},
 
-    setOneTask(state, taskParam){
-      state.task = taskParam
-    },
+    updateDescription(state, message) {state.task.description = message},
 
-    
-    setUID(state){
-      state.uid = localStorage.getItem('uid')
-    },
-    removeUID(state){
-      state.uid = ""
-    },
+    setOneTask(state, taskParam){state.task = taskParam},
 
-    setTaskList(state, list){
-      state.taskList = list
-    },
+    setUID(state){state.uid = localStorage.getItem('uid')},
+
+    removeUID(state){state.uid = ""},
+
+    setTaskList(state, list){state.taskList = list},
+
     setNewItemTaskList(state, {task}){
       if(state.taskList.tasks.length > 0){
         state.taskList.tasks.unshift(task)

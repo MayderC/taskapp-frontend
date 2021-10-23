@@ -29,14 +29,14 @@ export default {
   },
 
   computed :{
-    ...mapState(['taskList', 'uid']),
+    ...mapState(['taskList', 'uid', 'editTask']),
 
 
     
 
   },
   methods : {
-    ...mapMutations(['updateTaskLsit', 'setOneTask']),
+    ...mapMutations(['updateTaskLsit', 'setOneTask', 'setEditTask']),
 
     deleteItem(id){
 
@@ -48,9 +48,8 @@ export default {
     },
 
     setDataToEdit(task){
-
-
       this.setOneTask(JSON.parse(JSON.stringify(task)))
+      this.setEditTask(true)
     }
   }
 }
