@@ -48,9 +48,11 @@ export default {
   @media (max-width: 530px)
     .task__list
       width: 390px
+      justify-content: center
     
     .task__list__head > .search
       width: 75%
+  
 
 
 

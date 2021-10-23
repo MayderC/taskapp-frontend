@@ -65,13 +65,12 @@ export default {
     display: flex
     gap: 40px
     flex-wrap: wrap
-    justify-content: space-between
+    justify-content: center
     overflow-y: scroll
     align-content: flex-start
 
   /*.task__list__body::-webkit-scrollbar
-    display: none
-
+    display: none*/
 
 
 
