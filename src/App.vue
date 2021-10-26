@@ -2,7 +2,7 @@
   <main>
     <t-navbar-menu></t-navbar-menu>
     <router-view/>
-    <a href="https://mayder.codes" target="_blank">App Creada por MayderC</a>
+    <a href="" target="_blank">App Creada por MayderC</a>
   </main>
 </template>
 
