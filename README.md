@@ -1,5 +1,9 @@
 # taskapp-frontend
 
+## Capturas de pantalla
+
+<img src="">
+
 ## Project setup
 ```
 npm install

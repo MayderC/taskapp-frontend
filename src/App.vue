@@ -2,7 +2,7 @@
   <main>
     <t-navbar-menu></t-navbar-menu>
     <router-view/>
-    <a href="" target="_blank">App Creada por MayderC</a>
+    <a href="https://mayderc-portfolio.netlify.app/" target="_blank">App Creada por MayderC</a>
   </main>
 </template>
 
