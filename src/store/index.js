@@ -6,12 +6,18 @@ export default createStore({
   state: {
     isLogin : false,
     taskList : {tasks : []},
+    taskListBack: {tasks : []},
     task: {taskname : "", description: "", id : ""},
     editTask: false,
     uid : "",
+    search: "",
     profile: {}
   },
   mutations: {
+
+    setSearch(state, value){
+      state.search = value
+    },
 
     updateOneItemInArray(state, value){
       state.taskList.tasks[value.pos] = {taskname : value.taskname, description : value.description, id : value.id}
@@ -40,7 +46,10 @@ export default createStore({
 
     removeUID(state){state.uid = ""},
 
-    setTaskList(state, list){state.taskList = list},
+    setTaskList(state, list){
+      state.taskList = list},
+    
+    setTaskListBack(state, list){state.taskListBack = list},
 
     setNewItemTaskList(state, {task}){
       if(state.taskList.tasks.length > 0){

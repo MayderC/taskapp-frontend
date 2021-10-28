@@ -2,26 +2,74 @@
 
 section.task__list
   .task__list__head
-    input.search(type="text" placeholder="Search")
+    input.search(type="text" placeholder="Search" v-model="search")
   .task__list__body
-    task-card(v-for="task in taskList.tasks" :key="task.id" :task="task")
+    task-card(v-for="task in  taskList.tasks" :key="task.id" :task="task")
 
 </template>
 <script>
-
+import {getAllTasks} from '../../api/tasks'
 import TaskCard from '../task-card/TaskCard.vue'
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 export default {
   name: 'TaskList',
   components : {
-    TaskCard
+    TaskCard,
   },
   computed :{
-    ...mapState(['taskList'])
+    ...mapState(['taskList', 'taskListBack', 'uid']),
+
+
+    search: {
+      get(){
+        return this.$store.state.search
+      },
+      set(value){
+        this.setSearch(value)
+      }
+    },
   },
   methods : {
+    ...mapMutations(['setSearch', 'setTaskListBack', 'setTaskList']),
+
+    filterTasksSearch(task){
+      if(task.taskname.toLowerCase().includes(this.search.toLowerCase())){
+        return task
+      }
+    }
 
 
+
+
+  },
+  watch: {
+    async search(){
+      //set visible cancel seacrh botto
+      if(this.search.length > 0){
+
+      try {
+        const data = await getAllTasks(this.uid)
+        const filteredTask = data.tasks.filter(this.filterTasksSearch)
+        
+        this.setTaskListBack(JSON.parse(JSON.stringify(this.taskList.tasks)))
+        this.setTaskList({tasks: filteredTask})
+      } catch (error) {
+        return error
+      }
+
+      }else if(this.search.length < 1){
+        //set Invisible cancel seacrh bottom
+      try {
+        const data = await getAllTasks(this.uid)
+        this.setTaskList({tasks: data.tasks})
+      } catch (error) {
+        return error
+      }
+
+
+      }
+
+    }
   }
 }
 </script>
