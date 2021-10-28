@@ -2,7 +2,12 @@
 
 ## Capturas de pantalla
 
-<img src="">
+
+<img src="https://raw.githubusercontent.com/MayderC/taskapp-frontend/main/home.PNG">
+
+<img src="https://raw.githubusercontent.com/MayderC/taskapp-frontend/main/Captura2.PNG">
+
+<img src="https://raw.githubusercontent.com/MayderC/taskapp-frontend/main/Captura3.PNG">
 
 ## Project setup
 ```
